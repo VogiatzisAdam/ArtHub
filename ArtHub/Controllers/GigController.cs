@@ -33,6 +33,12 @@ namespace ArtHub.Controllers
         [HttpPost]
         public ActionResult Create(GigFormViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = context.Genres.ToList();
+                return View("Create", viewModel);
+            }
+
             //var artistId = User.Identity.GetUserId();
 
             // var artist = context.Users.Single(u => u.Id == artistId);
@@ -42,7 +48,7 @@ namespace ArtHub.Controllers
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
-                DateTime=viewModel.DateTime,
+                DateTime=viewModel.GetDateTime(),
                 GenreId=viewModel.GenreId,
                 Venue=viewModel.Venue
             };
