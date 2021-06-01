@@ -22,6 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+span.field-validation-error{
+    color:red;
+    font-weight:bold;
+}
 
 /*Bootstrap Overrides*/
 
@@ -38,4 +42,21 @@ textarea {
 }
 body {
     font-family: "Acme", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-control {
+    font-size: 17px;
+    /*padding: 20px 15px;*//*xalaei to dropdownlist ths create html gia auto vazo to height*/
+    height:40px;
+    border-radius: 9px;
+}
+.btn {  
+    font-size: 17px;
+    padding: 7px 20px;
+    border-radius: 9px;
+}
+.form-control:focus {
+    box-shadow:none;
 }
