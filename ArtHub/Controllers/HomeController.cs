@@ -1,16 +1,28 @@
-﻿using System;
+﻿using ArtHub.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace ArtHub.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext context;
+        public HomeController()
+        {
+            context = new ApplicationDbContext();
+        }
         public ActionResult Index()
         {
-            return View();
+            var upcomingGigs = context.Gigs
+                .Include(g => g.Artist)
+                .Include(g=>g.Genre)
+                .Where(g => g.DateTime > DateTime.Now);
+
+            return View(upcomingGigs);
         }
 
         public ActionResult About()
