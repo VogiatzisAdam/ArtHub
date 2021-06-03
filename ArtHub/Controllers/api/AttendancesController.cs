@@ -1,4 +1,5 @@
-﻿using ArtHub.Models;
+﻿using ArtHub.Dtos;
+using ArtHub.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,21 @@ namespace ArtHub.Controllers.api
             context = new ApplicationDbContext();
         }
 
+        // /api/attendances
         [HttpPost]
-        public IHttpActionResult Attend(int gigId)
+        public IHttpActionResult Attend(AttendanceDto dto)
         {
+            var userId = User.Identity.GetUserId();
+            //edge case
+            var exists = context.Attendances.Any(a => a.AttendeeId==userId && a.GigId==dto.GigId);
+
+            if (exists)
+                return BadRequest("The attendance already exists");
+
+            // add 1 Attendance
             var attendance = new Attendance
             {
-                GigId=gigId,
+                GigId=dto.GigId,
                 AttendeeId=User.Identity.GetUserId()
             };
 
