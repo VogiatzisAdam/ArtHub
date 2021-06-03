@@ -35,9 +35,10 @@ namespace ArtHub.Controllers
             {
                UpcomingGigs =gigs,
                ShowActions =User.Identity.IsAuthenticated,
+               Heading="Gigs I am attending"
             };
 
-            return View(viewModel);
+            return View("Gigs", viewModel);
         }
 
         // GET: Gig
