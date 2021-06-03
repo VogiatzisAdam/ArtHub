@@ -6,7 +6,7 @@ using System.Web;
 
 namespace ArtHub.ViewModels
 {
-    public class HomeViewModel
+    public class GigsViewModel
     {
         public IEnumerable<Gig> UpcomingGigs { get; set; }
         public bool ShowActions { get; set; }
