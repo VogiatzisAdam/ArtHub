@@ -27,6 +27,19 @@ span.field-validation-error{
     font-weight:bold;
 }
 
+.verticalSpace{
+    margin-top: 5px;
+}
+.verticalSpacelvl2 {
+    margin-top: 15px;
+}
+.verticalSpacelvl3 {
+    margin-top: 25px;
+}
+.verticalSpacelvl4 {
+    margin-top: 35px;
+}
+
 /*Bootstrap Overrides*/
 
 /*.navbar-inverse {
