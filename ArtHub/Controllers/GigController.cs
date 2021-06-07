@@ -60,10 +60,58 @@ namespace ArtHub.Controllers
         {
             var viewModel = new GigFormViewModel
             {
-                Genres=context.Genres.ToList()
+                Genres=context.Genres.ToList(),
+                Heading="Add a gig"
             };
 
-            return View(viewModel);
+            return View("GigForm",viewModel);
+        }
+
+        // GET: Edit
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var userId = User.Identity.GetUserId();
+
+            var gig = context.Gigs
+                .Single(g => g.Id == id && g.ArtistId==userId);
+
+            var viewModel = new GigFormViewModel
+            {
+                Id = gig.Id,
+                Heading = "Edit a gig",
+                Genres = context.Genres.ToList(),
+                Date = gig.DateTime.ToString("d MMM yyyy"),
+                Time = gig.DateTime.ToString("HH mm"),
+                GenreId = gig.GenreId,
+                Venue = gig.Venue
+            };
+
+            return View("GigForm", viewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Update(GigFormViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                viewModel.Genres = context.Genres.ToList();
+                return View("GigForm", viewModel);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var gig = context.Gigs
+                .Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
+
+            gig.Venue = viewModel.Venue;
+            gig.DateTime = viewModel.GetDateTime();
+            gig.GenreId = viewModel.GenreId;
+
+            context.SaveChanges();
+
+            return RedirectToAction("Mine", "Gig");
         }
 
         [Authorize]
@@ -74,7 +122,7 @@ namespace ArtHub.Controllers
             if (!ModelState.IsValid)
             {
                 viewModel.Genres = context.Genres.ToList();
-                return View("Create", viewModel);
+                return View("GigForm", viewModel);
             }
 
             //var artistId = User.Identity.GetUserId();
