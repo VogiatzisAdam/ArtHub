@@ -179,6 +179,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\api\AttendancesController.cs" />
+    <Compile Include="Controllers\api\GigsController.cs" />
     <Compile Include="Controllers\GigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -213,6 +214,10 @@
     <Compile Include="Migrations\202106021444209_AddAttendance.cs" />
     <Compile Include="Migrations\202106021444209_AddAttendance.Designer.cs">
       <DependentUpon>202106021444209_AddAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106091035139_AddIsCanceledToGig.cs" />
+    <Compile Include="Migrations\202106091035139_AddIsCanceledToGig.Designer.cs">
+      <DependentUpon>202106091035139_AddIsCanceledToGig.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -326,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106021444209_AddAttendance.resx">
       <DependentUpon>202106021444209_AddAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106091035139_AddIsCanceledToGig.resx">
+      <DependentUpon>202106091035139_AddIsCanceledToGig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

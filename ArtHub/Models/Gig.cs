@@ -9,6 +9,7 @@ namespace ArtHub.Models
     public class Gig
     {
         public int Id { get; set; }
+        public bool IsCanceled { get; set; } //logical delete not physical
 
         public ApplicationUser Artist { get; set; }
 

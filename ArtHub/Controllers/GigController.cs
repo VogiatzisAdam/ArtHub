@@ -25,7 +25,7 @@ namespace ArtHub.Controllers
             var userId = User.Identity.GetUserId();
 
             var gigs = context.Gigs
-                .Where(g => g.ArtistId == userId && g.DateTime > DateTime.Now)
+                .Where(g => g.ArtistId == userId && g.DateTime > DateTime.Now && !g.IsCanceled)
                 .Include(g => g.Genre)
                 .ToList();
 
