@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace ArtHub.Controllers.api
 {
@@ -23,34 +24,13 @@ namespace ArtHub.Controllers.api
         {
             var userId = User.Identity.GetUserId();
             var gig = context.Gigs
+                .Include(g=>g.Attendances.Select(a=>a.Attendee))
                 .Single(g => g.Id == id && g.ArtistId == userId);
 
             if (gig.IsCanceled)
                 return NotFound();
 
-            gig.IsCanceled = true; //change state
-
-            var notification = new Notification
-            {
-                DateTime=DateTime.Now,
-                Gig=gig,
-                Type=NotificationType.GigCanceled
-            };
-
-            var attendees = context.Attendances
-                .Where(a => a.GigId == gig.Id)
-                .Select(a => a.Attendee)
-                .ToList();
-
-            foreach(var attendee in attendees)
-            {
-                var userNotification = new UserNotification
-                {
-                    User = attendee,
-                    Notification  =notification
-                };
-                context.UserNotifications.Add(userNotification);
-            }
+            gig.Cancel();
 
             context.SaveChanges();
 

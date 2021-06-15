@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Routing;
 using System.Web.Mvc;
 using System.Web.Optimization;
+using AutoMapper;
+using ArtHub.App_Start;
 
 namespace ArtHub
 {
@@ -13,6 +15,7 @@ namespace ArtHub
     {
         protected void Application_Start()
         {
+            Mapper.Initialize(c => c.AddProfile<MappingProfile>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
