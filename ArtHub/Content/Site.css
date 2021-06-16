@@ -46,6 +46,16 @@ span.field-validation-error{
     background-color: #222;
     border-color: #080808;
 }*/
+.navbar-inverse .notifications{
+    position: relative;
+}
+
+.navbar-inverse .notifications .badge{
+    position: absolute;
+    top: 8px;
+    right: 0;
+    background: #808080;
+}
 
 .navbar-inverse .navbar-brand {
     color: #FF0000;
