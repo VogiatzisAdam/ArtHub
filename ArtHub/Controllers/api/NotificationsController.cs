@@ -21,6 +21,20 @@ namespace ArtHub.Controllers.api
             context = new ApplicationDbContext();
         }
 
+        [HttpPost]
+        public IHttpActionResult MarkAsRead()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var notifications = context.UserNotifications
+                .Where(un => un.UserId == userId && !un.IsRead)
+                .ToList();
+
+            notifications.ForEach(n => n.Read());
+            context.SaveChanges();
+
+            return Ok();
+        }
         public IEnumerable<NotificationDto> GetNotifications()
         {
             var userId = User.Identity.GetUserId();
